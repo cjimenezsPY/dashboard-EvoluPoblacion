@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import EvolucionAsegurados from "./EvolucionAsegurados";
-import { cargarExcel } from "./services/excelService";
-import { transformarDatos } from "./services/transformarDatos";
+import { obtenerDashboard } from "./services/dashboardDataService";
 
 function App() {
 
@@ -17,9 +16,7 @@ function App() {
 
         setCargando(true);
 
-        const hoja = await cargarExcel();
-
-        const datos = transformarDatos(hoja);
+        const datos = await obtenerDashboard();
 
         console.table(
           datos.map(d => ({
@@ -84,11 +81,9 @@ function App() {
   }
 
   return (
-
     <EvolucionAsegurados
       rawSeries={rawSeries}
     />
-
   );
 
 }
