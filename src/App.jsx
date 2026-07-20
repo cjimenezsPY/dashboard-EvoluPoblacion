@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Header from "./components/Header";
 import EvolucionAsegurados from "./EvolucionAsegurados";
 import { obtenerDashboard } from "./services/dashboardDataService";
 
@@ -80,11 +81,35 @@ function App() {
 
   }
 
+  const ultimoPeriodo =
+    rawSeries.length > 0
+      ? Object.keys(rawSeries[0].data)[0]
+      : "";
+
+  const totalSeries = rawSeries.length;
+
   return (
+
+  <div
+    style={{
+      maxWidth: 1600,
+      margin: "0 auto",
+      padding: 24
+    }}
+  >
+
+    <Header
+      ultimoPeriodo={ultimoPeriodo}
+      totalSeries={totalSeries}
+    />
+
     <EvolucionAsegurados
       rawSeries={rawSeries}
     />
-  );
+
+  </div>
+
+);
 
 }
 
